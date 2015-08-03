@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'tilt/haml'
 require 'mongoid'
+require 'models/honey'
 
 # The main module
 module Honeypot
@@ -12,6 +13,14 @@ module Honeypot
 
     get '/' do
       haml :index
+    end
+
+    get '/new/raw' do
+      haml :new_raw
+    end
+
+    post '/new/raw' do
+      Honey.create(JSON.parse(params[:raw]))
     end
   end
 end
