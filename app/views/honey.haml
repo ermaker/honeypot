@@ -1,4 +1,4 @@
 %div
-  - honey.attributes.reject { |k,v| k == '_id' }.each do |key,value|
+  - honey.attributes_without_id.each do |key,value|
     %div= key
     %div= value
