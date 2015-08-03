@@ -1,4 +1,3 @@
-[![Gem Version](https://badge.fury.io/rb/honeypot.svg)](http://badge.fury.io/rb/honeypot)
 [![Build Status](https://travis-ci.org/ermaker/honeypot.svg?branch=master)](https://travis-ci.org/ermaker/honeypot)
 [![Dependency Status](https://gemnasium.com/ermaker/honeypot.svg)](https://gemnasium.com/ermaker/honeypot)
 [![Code Climate](https://codeclimate.com/github/ermaker/honeypot/badges/gpa.svg)](https://codeclimate.com/github/ermaker/honeypot)
