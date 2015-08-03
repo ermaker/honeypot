@@ -20,24 +20,28 @@ RSpec.feature Honeypot::App do
 
   scenario 'get /' do
     visit '/'
-    expect(page).not_to have_content('a')
-    expect(page).not_to have_content(3)
-    expect(page).not_to have_content('b')
-    expect(page).not_to have_content(4)
+    expect(page).to have_title('Honeypot')
+    expect(page).to have_content('Hello, Honeypot!')
 
-    create_honey_json(a: 3)
     visit '/'
-    expect(page).to have_content('a')
-    expect(page).to have_content(3)
-    expect(page).not_to have_content('b')
-    expect(page).not_to have_content(4)
+    expect(page).not_to have_content('aaa')
+    expect(page).not_to have_content(333)
+    expect(page).not_to have_content('bbb')
+    expect(page).not_to have_content(444)
 
-    create_honey_json(b: 4)
+    create_honey_json(aaa: 333)
     visit '/'
-    expect(page).to have_content('a')
-    expect(page).to have_content(3)
-    expect(page).to have_content('b')
-    expect(page).to have_content(4)
+    expect(page).to have_content('aaa')
+    expect(page).to have_content(333)
+    expect(page).not_to have_content('bbb')
+    expect(page).not_to have_content(444)
+
+    create_honey_json(bbb: 444)
+    visit '/'
+    expect(page).to have_content('aaa')
+    expect(page).to have_content(333)
+    expect(page).to have_content('bbb')
+    expect(page).to have_content(444)
   end
 
   feature 'get and post /new/raw' do
