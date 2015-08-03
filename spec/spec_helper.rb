@@ -26,6 +26,13 @@ end
 
 ENV['RACK_ENV'] = 'test'
 
+if ENV['COV']
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter '/spec/'
+  end
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

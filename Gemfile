@@ -18,6 +18,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'yard'
+  gem 'simplecov'
   gem 'guard'
   gem 'guard-rubocop'
   gem 'guard-rspec'

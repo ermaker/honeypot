@@ -7,4 +7,10 @@ RuboCop::RakeTask.new
 RSpec::Core::RakeTask.new
 YARD::Rake::YardocTask.new
 
-task default: [:rubocop, :spec, :yard]
+desc 'Run SimpleCov'
+task :cov do
+  ENV['COV'] = 'true'
+  Rake::Task[:spec].execute
+end
+
+task default: [:rubocop, :cov, :yard]
