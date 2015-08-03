@@ -23,6 +23,7 @@ group :development, :test do
   gem 'guard-rubocop'
   gem 'guard-rspec'
   gem 'guard-yard'
+  gem 'guard-bundler'
 end
 
 gem 'codecov', require: false, group: :test
