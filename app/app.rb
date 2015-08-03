@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'tilt/haml'
 require 'mongoid'
 
+# The main module
 module Honeypot
   # The main app class
   class App < Sinatra::Base
