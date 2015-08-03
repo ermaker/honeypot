@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'puma'
 gem 'foreman'
 
+gem 'rake'
 gem 'rack'
 gem 'rack-timeout'
 gem 'sinatra', require: 'sinatra/base'
