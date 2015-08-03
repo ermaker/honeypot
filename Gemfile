@@ -8,7 +8,6 @@ gem 'rack'
 gem 'rack-timeout'
 gem 'sinatra', require: 'sinatra/base'
 gem 'mongoid'
-gem 'bson_ext'
 gem 'haml'
 
 group :development, :test do
