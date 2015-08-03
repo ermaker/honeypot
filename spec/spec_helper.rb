@@ -26,8 +26,12 @@ end
 
 ENV['RACK_ENV'] = 'test'
 
-if ENV['COV']
+if ENV['CI'] || ENV['COV']
   require 'simplecov'
+  if ENV['CI']
+    require 'codecov'
+    SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  end
   SimpleCov.start do
     add_filter '/spec/'
   end

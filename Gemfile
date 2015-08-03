@@ -24,3 +24,5 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-yard'
 end
+
+gem 'codecov', require: false, group: :test
