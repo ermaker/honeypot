@@ -18,7 +18,7 @@ RSpec.describe Honeypot::Honey do
       expect(subject.attributes_without_id).to be_a(Hash)
     end
 
-    it 'works when empty' do
+    it 'works empty' do
       subject = described_class.new(params)
       expect(subject.attributes).to be_a(Hash)
       expect(subject.attributes).to a_hash_including(params)
