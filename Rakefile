@@ -13,4 +13,14 @@ task :cov do
   Rake::Task[:spec].execute
 end
 
+desc 'Run Cov Server'
+task cov_server: :cov do
+  system(<<-EOC)
+      docker run -it --rm \
+      -v #{File.expand_path('../coverage', __FILE__)}:/usr/share/nginx/html:ro \
+      -p 8080:80 \
+      nginx
+  EOC
+end
+
 task default: [:rubocop, :cov, :yard]
