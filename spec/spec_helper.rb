@@ -16,7 +16,7 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-%w(app lib).each do |dir|
+%w(app lib config).each do |dir|
   path = File.expand_path("../../#{dir}", __FILE__)
   $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
 end

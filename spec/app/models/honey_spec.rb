@@ -1,5 +1,4 @@
 require 'app'
-require 'models/honey'
 
 RSpec.describe Honeypot::Honey do
   let(:params) { { 'aaa' => 333, 'bbb' => 444 } }

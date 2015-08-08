@@ -16,8 +16,12 @@ module Honeypot
         create: collection_name.to_s,
         capped: true,
         size: 1024
-      )
-      create
+      ).tap do
+        create
+      end
+    rescue Moped::Errors::OperationFailure => e
+      raise unless e.details[:errmsg] == 'collection already exists'
+      raise unless collection.capped?
     end
   end
 end

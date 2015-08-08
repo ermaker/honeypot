@@ -2,6 +2,7 @@ require 'rubocop/rake_task'
 require 'rspec/core/rake_task'
 require 'yard'
 require 'yard/rake/yardoc_task'
+require File.expand_path('../config/environment', __FILE__)
 
 RuboCop::RakeTask.new
 RSpec::Core::RakeTask.new
@@ -24,3 +25,11 @@ task cov_server: :cov do
 end
 
 task default: [:rubocop, :cov, :yard]
+
+namespace :db do
+  desc 'Create Database'
+  task :create do
+    require 'models/log'
+    Honeypot::Log.create_collection
+  end
+end

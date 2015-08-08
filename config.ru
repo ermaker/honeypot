@@ -1,11 +1,7 @@
 require 'bundler/setup'
 Bundler.require(:default)
 Bundler.require(Sinatra::Base.environment)
-
-%w(app lib).each do |dir|
-  path = File.expand_path("../#{dir}", __FILE__)
-  $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
-end
+require File.expand_path('../config/environment', __FILE__)
 
 use Rack::Timeout
 Rack::Timeout.timeout = 5

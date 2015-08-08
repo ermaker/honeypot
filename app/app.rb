@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/partial'
 require 'tilt/haml'
-require 'mongoid'
+require 'environment'
 require 'models/honey'
 require 'models/log'
 
@@ -10,7 +10,6 @@ module Honeypot
   # The main app class
   class App < Sinatra::Base
     configure do
-      Mongoid.load!(File.expand_path('../../config/mongoid.yml', __FILE__))
       register Sinatra::Partial
     end
 
