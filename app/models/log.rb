@@ -2,7 +2,7 @@ require 'mongoid'
 
 module Honeypot
   # The Container for anything
-  class CappedHoney
+  class Log
     include Mongoid::Document
     include Mongoid::Attributes::Dynamic
 

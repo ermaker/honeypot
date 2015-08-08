@@ -1,9 +1,9 @@
 require 'app'
-require 'models/capped_honey'
+require 'models/log'
 require 'ext/mongoid'
 require 'thread'
 
-RSpec.describe Honeypot::CappedHoney do
+RSpec.describe Honeypot::Log do
   before do
     described_class.collection.drop
     described_class.create_collection
