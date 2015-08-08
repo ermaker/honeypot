@@ -19,15 +19,5 @@ module Honeypot
       )
       create
     end
-
-    def self.tailable_cursor
-      all.query.tailable.skip(all.size).cursor
-    end
-
-    def self.lazy_diff_cursor
-      tailable_cursor.lazy.map do |_|
-        desc('_id').limit(2).reverse
-      end
-    end
   end
 end
