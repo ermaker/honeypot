@@ -1,7 +1,9 @@
 module Mongoid
   class Criteria # rubocop:disable Style/Documentation
     def tailable_cursor
-      query.tailable.skip(size).cursor
+      skip_value = size - 1
+      skip_value = 0 if skip_value < 0
+      query.tailable.skip(skip_value).cursor
     end
 
     def tailable_diff

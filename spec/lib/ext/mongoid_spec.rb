@@ -25,10 +25,10 @@ RSpec.describe Honeypot::Log do
       Thread.start { s.synchronize(&blk) }
     end
 
-    describe 'with .all' do
-      subject { described_class.all }
+    describe 'with a common case' do
+      subject { described_class.where(:value.exists => true) }
 
-      it 'works with .all' do
+      it 'works' do
         async_with_tailable_diff do
           described_class.create(value: 0)
           described_class.create(value: 1)
@@ -52,11 +52,26 @@ RSpec.describe Honeypot::Log do
 
     describe 'with .where' do
       subject { described_class.where(type: 1) }
+
       it 'works' do
         async_with_tailable_diff do
           described_class.create(type: 0, value: 0)
           described_class.create(type: 1, value: 0)
           described_class.create(type: 0, value: 1)
+          described_class.create(type: 1, value: 1)
+        end
+        actual = subject.tailable_diff do |prev, now|
+          break([prev, now])
+        end
+        actual.map!(&:attributes_without_id)
+        expect(actual).to match([
+          { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
+        ])
+      end
+
+      it 'works with existing values' do
+        described_class.create(type: 1, value: 0)
+        async_with_tailable_diff do
           described_class.create(type: 1, value: 1)
         end
         actual = subject.tailable_diff do |prev, now|
