@@ -16,13 +16,12 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'capybara/rspec'
-require 'spec_helper_database'
-
 %w(app lib).each do |dir|
   path = File.expand_path("../../#{dir}", __FILE__)
   $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
 end
+require 'capybara/rspec'
+require 'spec_helper_database'
 
 ENV['RACK_ENV'] = 'test'
 

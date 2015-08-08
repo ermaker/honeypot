@@ -3,6 +3,7 @@ require 'sinatra/partial'
 require 'tilt/haml'
 require 'mongoid'
 require 'models/honey'
+require 'models/log'
 
 # The main module
 module Honeypot
@@ -23,6 +24,12 @@ module Honeypot
 
     post '/new/raw' do
       Honey.create(JSON.parse(params[:raw]))
+    end
+
+    post '/log' do
+      request.body.rewind
+      raw = request.body.read
+      Log.create(JSON.parse(raw)) unless raw.empty?
     end
   end
 end
