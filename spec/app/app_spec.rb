@@ -14,13 +14,15 @@ RSpec.feature Honeypot::App do
     end
 
     given(:valid_input) { { 'a' => 3, 'b' => 4 } }
+    given(:last_log) do
+      Honeypot::Log.desc('_id').limit(1).first
+    end
 
     scenario 'with some json' do
       expect do
         page.driver.post('/log', valid_input.to_json)
       end.to change { Honeypot::Log.all.size }.by(1)
-      expect(Honeypot::Log.desc('_id').limit(1).first.attributes)
-        .to a_hash_including(valid_input)
+      expect(last_log.attributes).to a_hash_including(valid_input)
     end
   end
 end
