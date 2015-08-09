@@ -41,7 +41,7 @@ RSpec.describe Honeypot::Log do
           actual.push([prev, now])
           break if (count -= 1).zero?
         end
-        actual.map! { |items| items.map(&:attributes_without_id) }
+        actual.map! { |items| items.map(&:attributes_without_generated_values) }
         expect(actual).to match([
           [{ 'value' => 0 }, { 'value' => 1 }],
           [{ 'value' => 1 }, { 'value' => 2 }],
@@ -63,7 +63,7 @@ RSpec.describe Honeypot::Log do
         actual = subject.tailable_diff do |prev, now|
           break([prev, now])
         end
-        actual.map!(&:attributes_without_id)
+        actual.map!(&:attributes_without_generated_values)
         expect(actual).to match([
           { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
         ])
@@ -77,7 +77,7 @@ RSpec.describe Honeypot::Log do
         actual = subject.tailable_diff do |prev, now|
           break([prev, now])
         end
-        actual.map!(&:attributes_without_id)
+        actual.map!(&:attributes_without_generated_values)
         expect(actual).to match([
           { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
         ])
