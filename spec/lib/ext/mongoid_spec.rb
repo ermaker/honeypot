@@ -1,23 +1,13 @@
-require 'app'
 require 'models/log'
 require 'ext/mongoid'
 require 'thread'
 
 RSpec.describe Honeypot::Log do
-  before do
-    described_class.collection.drop
-    described_class.create_collection
-  end
-
-  after do
-    described_class.collection.drop
-  end
-
   describe '#tailable_diff' do
     def async_with_tailable_diff(&blk)
       s = Mutex.new
-      cached_tailable_cursor = subject.tailable_cursor
-      allow(subject).to receive(:tailable_cursor) do
+      cached_tailable_cursor = critera.tailable_cursor
+      allow(critera).to receive(:tailable_cursor) do
         s.unlock
         cached_tailable_cursor
       end
@@ -27,6 +17,7 @@ RSpec.describe Honeypot::Log do
 
     describe 'with a common case' do
       subject { described_class.where(:value.exists => true) }
+      let(:critera) { subject }
 
       it 'works' do
         async_with_tailable_diff do
@@ -52,6 +43,7 @@ RSpec.describe Honeypot::Log do
 
     describe 'with .where' do
       subject { described_class.where(type: 1) }
+      let(:critera) { subject }
 
       it 'works' do
         async_with_tailable_diff do

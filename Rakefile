@@ -33,3 +33,12 @@ namespace :db do
     Honeypot::Log.create_collection
   end
 end
+
+namespace :worker do
+  desc 'Run SWCert worker'
+  task :sw_cert do
+    require 'honeypot/worker'
+    require 'honeypot/sw_cert'
+    Honeypot::Worker.new(Honeypot::SWCert.new).run
+  end
+end
