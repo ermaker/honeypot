@@ -8,6 +8,7 @@ gem 'rack'
 gem 'rack-timeout'
 gem 'sinatra', require: 'sinatra/base'
 gem 'mongoid'
+gem 'mshard'
 
 group :development, :test do
   gem 'pry'
