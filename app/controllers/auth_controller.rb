@@ -17,6 +17,22 @@ class AuthController < ApplicationController
   end
 
   def complete
-    @code = params[:code]
+    FakeWeb.register_uri(
+      :post,
+      'https://api.pushbullet.com/oauth2/token',
+      content_type: 'application/json',
+      body: { token_type: :Bearer, access_token: :access_token }.to_json
+    )
+
+    response = HTTParty.post(
+      'https://api.pushbullet.com/oauth2/token',
+      body: {
+        grant_type: :authorization_code,
+        client_id: ENV['PUSHBULLET_CLIENT_ID'],
+        client_secret: ENV['PUSHBULLET_CLIENT_SECRET'],
+        code: params[:code]
+      }
+    ).parsed_response
+    current_user.update_attributes(response)
   end
 end

@@ -29,6 +29,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'mongoid'
 gem 'devise'
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,6 +59,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-spring'
 end
+gem 'fakeweb', group: :test
 
 gem 'puma'
 gem 'foreman'
