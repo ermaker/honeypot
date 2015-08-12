@@ -1,0 +1,19 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  RunRailsCops: true
+
+Metrics/LineLength:
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'db/seeds.rb'
+    - 'bin/spring'
+    - 'config/routes.rb'
+    - 'config/initializers/wrap_parameters.rb'
+    - 'config/initializers/assets.rb'
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/environments/development.rb'
+    - 'config/environments/test.rb'
+    - 'config/environments/production.rb'
+    - 'config/application.rb'
