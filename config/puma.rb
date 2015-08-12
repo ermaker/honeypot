@@ -5,7 +5,7 @@ if ENV.key?('MAX_THREADS')
 end
 
 port ENV['PORT']
-environment ENV['RACK_ENV']
+environment ENV['RAILS_ENV']
 
 preload_app!
 
