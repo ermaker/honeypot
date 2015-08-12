@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -24,12 +24,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -39,5 +33,25 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'pry'
+  gem 'rubocop'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'rack-test'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'yard'
+  gem 'yard-rails'
+  gem 'simplecov'
+  gem 'guard'
+  gem 'guard-rubocop'
+  gem 'guard-rspec'
+  gem 'guard-yard'
+  gem 'guard-bundler'
 end
 
+gem 'puma'
+gem 'foreman'
+gem 'rails_12factor'
+gem 'codecov', require: false, group: :test
