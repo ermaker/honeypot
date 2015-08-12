@@ -17,13 +17,6 @@ class AuthController < ApplicationController
   end
 
   def complete
-    FakeWeb.register_uri(
-      :post,
-      'https://api.pushbullet.com/oauth2/token',
-      content_type: 'application/json',
-      body: { token_type: :Bearer, access_token: :access_token }.to_json
-    )
-
     response = HTTParty.post(
       'https://api.pushbullet.com/oauth2/token',
       body: {

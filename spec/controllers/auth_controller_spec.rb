@@ -27,6 +27,13 @@ RSpec.describe AuthController do
 
     it 'works with sign-in' do
       sign_in User.create!(email: 'a@a.com', password: '12345678')
+      FakeWeb.register_uri(
+        :post,
+        'https://api.pushbullet.com/oauth2/token',
+        content_type: 'application/json',
+        body: { token_type: :Bearer, access_token: :access_token }.to_json
+      )
+
       get :complete, code: :code, state: nil
       expect(subject.current_user.token_type).to eq('Bearer')
       expect(subject.current_user.access_token).to eq('access_token')

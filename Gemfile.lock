@@ -166,6 +166,10 @@ GEM
       bson (~> 3.0)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
+    mshard (0.3.0)
+      haml
+      httparty
+      thor
     multi_json (1.11.2)
     multi_xml (0.5.5)
     nenv (0.2.0)
@@ -335,6 +339,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mongoid
+  mshard
   pry
   puma
   rack-test

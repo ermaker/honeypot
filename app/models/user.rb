@@ -6,9 +6,6 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  field :token_type, type: String
-  field :access_token, type: String
-
   ## Database authenticatable
   field :email,              type: String, default: ''
   field :encrypted_password, type: String, default: ''
@@ -39,4 +36,13 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   # rubocop:enable Metrics/LineLength
+
+  field :token_type, type: String
+  field :access_token, type: String
+
+  def push(params)
+    MShard::MShard.new.set_safe(
+      params.merge(pushbullet: access_token)
+    )
+  end
 end
