@@ -41,7 +41,7 @@ end
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: "bundle exec rspec" do
+guard :rspec, cmd: "bin/rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -84,4 +84,11 @@ guard 'yard' do
   watch(%r{app/.+\.rb})
   watch(%r{lib/.+\.rb})
   watch(%r{ext/.+\.c})
+end
+
+guard 'spring', bundler: true do
+  watch('Gemfile.lock')
+  watch(%r{^config/})
+  watch(%r{^spec/(support|factories)/})
+  watch(%r{^spec/factory.rb})
 end

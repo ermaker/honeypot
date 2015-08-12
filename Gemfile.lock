@@ -97,6 +97,10 @@ GEM
     guard-rubocop (1.2.0)
       guard (~> 2.0)
       rubocop (~> 0.20)
+    guard-spring (1.1.1)
+      guard (~> 2.0)
+      guard-compat (~> 1.1)
+      spring
     guard-yard (2.1.4)
       guard (>= 1.1.0)
       yard (>= 0.7.0)
@@ -267,6 +271,7 @@ DEPENDENCIES
   guard-bundler
   guard-rspec
   guard-rubocop
+  guard-spring
   guard-yard
   jbuilder (~> 2.0)
   jquery-rails

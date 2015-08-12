@@ -49,6 +49,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-yard'
   gem 'guard-bundler'
+  gem 'guard-spring'
 end
 
 gem 'puma'
