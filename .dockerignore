@@ -2,6 +2,7 @@
 .bundle/
 .yardoc/
 doc/
+coverage/
 spec/
 tmp/
 log/

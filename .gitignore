@@ -14,5 +14,6 @@
 
 /.yardoc/
 /doc/
+/coverage/
 /.env
 /spec/examples.txt
