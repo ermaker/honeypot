@@ -1,5 +1,5 @@
 # The Log model
 class Log
   include Mongoid::Document
-  field :type, type: String
+  include Mongoid::Attributes::Dynamic
 end

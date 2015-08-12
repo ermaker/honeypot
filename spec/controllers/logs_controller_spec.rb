@@ -23,11 +23,7 @@ RSpec.describe LogsController, type: :controller do
   # Log. As you add validations to Log, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { type: :type, status: [] }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -35,125 +31,25 @@ RSpec.describe LogsController, type: :controller do
   # LogsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe 'GET #index' do
-    it 'assigns all logs as @logs' do
-      log = Log.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:logs)).to eq([log])
-    end
-  end
-
-  describe 'GET #show' do
-    it 'assigns the requested log as @log' do
-      log = Log.create! valid_attributes
-      get :show, { id: log.to_param }, valid_session
-      expect(assigns(:log)).to eq(log)
-    end
-  end
-
-  describe 'GET #new' do
-    it 'assigns a new log as @log' do
-      get :new, {}, valid_session
-      expect(assigns(:log)).to be_a_new(Log)
-    end
-  end
-
-  describe 'GET #edit' do
-    it 'assigns the requested log as @log' do
-      log = Log.create! valid_attributes
-      get :edit, { id: log.to_param }, valid_session
-      expect(assigns(:log)).to eq(log)
-    end
-  end
-
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Log' do
         expect do
-          post :create, { log: valid_attributes }, valid_session
+          post :create, valid_attributes.merge(format: :json), valid_session
         end.to change(Log, :count).by(1)
       end
 
       it 'assigns a newly created log as @log' do
-        post :create, { log: valid_attributes }, valid_session
+        post :create, valid_attributes.merge(format: :json), valid_session
         expect(assigns(:log)).to be_a(Log)
         expect(assigns(:log)).to be_persisted
       end
 
-      it 'redirects to the created log' do
-        post :create, { log: valid_attributes }, valid_session
-        expect(response).to redirect_to(Log.last)
+      it 'successes to the created log' do
+        post :create, valid_attributes.merge(format: :json), valid_session
+        expect(response).to be_success
+        expect(response.status).to eq(201)
       end
-    end
-
-    context 'with invalid params' do
-      it 'assigns a newly created but unsaved log as @log' do
-        post :create, { log: invalid_attributes }, valid_session
-        expect(assigns(:log)).to be_a_new(Log)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, { log: invalid_attributes }, valid_session
-        expect(response).to render_template('new')
-      end
-    end
-  end
-
-  describe 'PUT #update' do
-    context 'with valid params' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
-
-      it 'updates the requested log' do
-        log = Log.create! valid_attributes
-        put :update, { id: log.to_param, log: new_attributes }, valid_session
-        log.reload
-        skip('Add assertions for updated state')
-      end
-
-      it 'assigns the requested log as @log' do
-        log = Log.create! valid_attributes
-        put :update, { id: log.to_param, log: valid_attributes }, valid_session
-        expect(assigns(:log)).to eq(log)
-      end
-
-      it 'redirects to the log' do
-        log = Log.create! valid_attributes
-        put :update, { id: log.to_param, log: valid_attributes }, valid_session
-        expect(response).to redirect_to(log)
-      end
-    end
-
-    context 'with invalid params' do
-      it 'assigns the log as @log' do
-        log = Log.create! valid_attributes
-        put :update, { id: log.to_param, log: invalid_attributes },
-            valid_session
-        expect(assigns(:log)).to eq(log)
-      end
-
-      it "re-renders the 'edit' template" do
-        log = Log.create! valid_attributes
-        put :update, { id: log.to_param, log: invalid_attributes },
-            valid_session
-        expect(response).to render_template('edit')
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'destroys the requested log' do
-      log = Log.create! valid_attributes
-      expect do
-        delete :destroy, { id: log.to_param }, valid_session
-      end.to change(Log, :count).by(-1)
-    end
-
-    it 'redirects to the logs list' do
-      log = Log.create! valid_attributes
-      delete :destroy, { id: log.to_param }, valid_session
-      expect(response).to redirect_to(logs_url)
     end
   end
 end
