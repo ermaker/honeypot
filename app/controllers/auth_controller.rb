@@ -15,4 +15,8 @@ class AuthController < ApplicationController
   def start
     redirect_to(pushbullet_authorize_uri)
   end
+
+  def complete
+    @code = params[:code]
+  end
 end

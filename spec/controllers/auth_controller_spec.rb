@@ -19,4 +19,19 @@ RSpec.describe AuthController do
       expect(response).to redirect_to(subject.pushbullet_authorize_uri)
     end
   end
+
+  describe 'GET #complete' do
+    it 'works without sign-in' do
+      get :complete
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'works with sign-in' do
+      @user = User.create!(email: 'a@a.com', password: '12345678')
+      sign_in @user
+      get :complete, code: :code, state: nil
+      expect(assigns(:code)).to eq('code')
+      expect(response).to be_success
+    end
+  end
 end
