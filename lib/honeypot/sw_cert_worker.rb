@@ -1,3 +1,5 @@
+require 'honeypot/workerable'
+
 module Honeypot
   # The worker class for SW Cert
   class SWCertWorker
