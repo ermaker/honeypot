@@ -119,7 +119,7 @@ GEM
     guard-yard (2.1.4)
       guard (>= 1.1.0)
       yard (>= 0.7.0)
-    haml (4.0.6)
+    haml (4.0.7)
       tilt
     haml-rails (0.9.0)
       actionpack (>= 4.0.1)
@@ -281,7 +281,7 @@ GEM
     spring (1.3.6)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.2.0)
+    sprockets (3.3.0)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
       actionpack (>= 3.0)
@@ -359,6 +359,3 @@ DEPENDENCIES
   web-console (~> 2.0)
   yard
   yard-rails
-
-BUNDLED WITH
-   1.10.6
