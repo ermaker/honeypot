@@ -53,5 +53,6 @@ RSpec.describe Honeypot::SWCertWorker do
   end
 
   it '#notify works' do
+    skip('TODO')
   end
 end

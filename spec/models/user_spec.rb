@@ -25,8 +25,4 @@ RSpec.describe User do
     )
     expect(result).to eq('id')
   end
-
-  it '#notify works' do
-    skip('TODO')
-  end
 end
