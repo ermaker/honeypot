@@ -34,11 +34,6 @@ guard 'spring', bundler: true do
   watch(%r{^spec/factory.rb})
 end
 
-guard :rubocop do
-  watch(/.+\.rb$/)
-  watch(%r{(?:.+/)?\.rubocop(_todo)?\.yml$}) { |m| File.dirname(m[0]) }
-end
-
 # Note: The cmd option is now required due to the increasing number of ways
 #       rspec may be run, below are examples of the most common uses.
 #  * bundler: 'bundle exec rspec'
@@ -85,6 +80,11 @@ guard :rspec, cmd: 'COV=true bin/rspec' do
   # Capybara features specs
   watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
   watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }
+end
+
+guard :rubocop do
+  watch(/.+\.rb$/)
+  watch(%r{(?:.+/)?\.rubocop(_todo)?\.yml$}) { |m| File.dirname(m[0]) }
 end
 
 guard 'yard' do
