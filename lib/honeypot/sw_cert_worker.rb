@@ -11,8 +11,13 @@ module Honeypot
       Hash[log[:status].map { |l| [l[0...-1], l[-1][/\d+$/].to_i] }]
     end
 
-    def notify(_diff)
-      User.all.each do |_user|
+    def notify(diff)
+      User.all.each do |user|
+        user.push(
+          type: :note,
+          title: diff.values.sum,
+          body: diff.map { |k, v| "#{k}: #{v}" }.join("\n")
+        )
       end
     end
 
