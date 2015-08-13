@@ -15,7 +15,7 @@ RSpec.describe User do
       :post,
       %r{/shards$},
       content_type: 'application/json',
-      body: { id: 'id' }.to_json
+      body: { id: :id }.to_json
     )
 
     result = subject.push(
