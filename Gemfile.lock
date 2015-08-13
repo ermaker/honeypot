@@ -359,3 +359,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   yard
   yard-rails
+
+BUNDLED WITH
+   1.10.6
