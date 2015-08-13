@@ -17,3 +17,5 @@
 /coverage/
 /.env
 /spec/examples.txt
+
+/public/assets
