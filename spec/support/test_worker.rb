@@ -1,7 +1,7 @@
-require 'honeypot/workerable'
+require 'honeypot/workable'
 
 class TestWorker # rubocop:disable Style/Documentation
-  include Honeypot::Workerable
+  include Honeypot::Workable
 
   def critera
     ::TestModel.where(type: 0)

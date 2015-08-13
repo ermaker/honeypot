@@ -1,6 +1,6 @@
 module Honeypot
   # The workerable module
-  module Workerable
+  module Workable
     def run
       critera.tailable_diff do |prev, now|
         check(prev, now)

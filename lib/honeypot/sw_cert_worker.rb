@@ -1,9 +1,9 @@
-require 'honeypot/workerable'
+require 'honeypot/workable'
 
 module Honeypot
   # The worker class for SW Cert
   class SWCertWorker
-    include Workerable
+    include Workable
 
     def critera
       Log.where(type: 'sw_cert')
