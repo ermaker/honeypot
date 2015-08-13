@@ -2,6 +2,7 @@ require 'thread'
 
 class TestModel # rubocop:disable Style/Documentation
   include Mongoid::Document
+  include Tailable
   field :type, type: Integer
   field :value, type: Integer
 
@@ -10,19 +11,6 @@ class TestModel # rubocop:disable Style/Documentation
   # @return [Hash] Attributes except '_id' and 'c_at'
   def attributes_without_generated_values
     attributes.reject { |k, _| GENERATED_KEYS.include?(k) }
-  end
-
-  def self.create_collection # rubocop:disable Metrics/AbcSize
-    mongo_session.command(
-      create: collection_name.to_s,
-      capped: true,
-      size: 20 * 1024 * 1024
-    ).tap do
-      create
-    end
-  rescue Moped::Errors::OperationFailure => e
-    raise unless e.details[:errmsg] == 'collection already exists'
-    raise unless collection.capped?
   end
 end
 

@@ -1,4 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Log, type: :model do
+RSpec.describe Log do
+  it_behaves_like 'tailable'
 end
