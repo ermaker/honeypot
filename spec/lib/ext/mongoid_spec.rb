@@ -16,8 +16,7 @@ end
 
 RSpec.describe TestModel do
   before do
-    described_class.collection.drop
-    described_class.create_collection
+    described_class.create_collection_tailable!
   end
 
   after do
