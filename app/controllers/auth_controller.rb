@@ -6,7 +6,7 @@ class AuthController < ApplicationController
     URI('https://www.pushbullet.com/authorize').tap do |uri|
       uri.query = {
         client_id: ENV['PUSHBULLET_CLIENT_ID'],
-        redirect_uri: request.base_url + auth_complete_path,
+        redirect_uri: auth_complete_url,
         response_type: :code
       }.to_query
     end.to_s
