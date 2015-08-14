@@ -53,6 +53,7 @@ group :development, :test do
   gem 'yard'
   gem 'yard-rails'
   gem 'simplecov'
+  gem 'factory_girl_rails'
   gem 'guard'
   gem 'guard-rubocop'
   gem 'guard-rspec'
