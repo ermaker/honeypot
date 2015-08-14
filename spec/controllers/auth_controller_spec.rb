@@ -13,7 +13,7 @@ RSpec.describe AuthController do
     end
 
     it 'works with sign-in' do
-      sign_in User.create!(email: 'a@a.com', password: '12345678')
+      sign_in create(:user)
       get :start
       expect(response).to redirect_to(subject.pushbullet_authorize_uri)
     end
@@ -26,7 +26,7 @@ RSpec.describe AuthController do
     end
 
     it 'works with sign-in' do
-      sign_in User.create!(email: 'a@a.com', password: '12345678')
+      sign_in create(:user)
       FakeWeb.register_uri(
         :post,
         'https://api.pushbullet.com/oauth2/token',
