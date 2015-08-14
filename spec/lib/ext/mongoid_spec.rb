@@ -28,10 +28,10 @@ RSpec.describe TestModel do
 
       it 'works' do
         async_with_tailable_diff do
-          described_class.create(value: 0)
-          described_class.create(value: 1)
-          described_class.create(value: 2)
-          described_class.create(value: 3)
+          create(described_class, value: 0)
+          create(described_class, value: 1)
+          create(described_class, value: 2)
+          create(described_class, value: 3)
         end
         actual = []
         count = 3
@@ -54,10 +54,10 @@ RSpec.describe TestModel do
 
       it 'works' do
         async_with_tailable_diff do
-          described_class.create(type: 0, value: 0)
-          described_class.create(type: 1, value: 0)
-          described_class.create(type: 0, value: 1)
-          described_class.create(type: 1, value: 1)
+          create(described_class, type: 0, value: 0)
+          create(described_class, type: 1, value: 0)
+          create(described_class, type: 0, value: 1)
+          create(described_class, type: 1, value: 1)
         end
         actual = critera.tailable_diff do |prev, now|
           break([prev, now])
@@ -69,9 +69,9 @@ RSpec.describe TestModel do
       end
 
       it 'works with existing values' do
-        described_class.create(type: 1, value: 0)
+        create(described_class, type: 1, value: 0)
         async_with_tailable_diff do
-          described_class.create(type: 1, value: 1)
+          create(described_class, type: 1, value: 1)
         end
         actual = critera.tailable_diff do |prev, now|
           break([prev, now])

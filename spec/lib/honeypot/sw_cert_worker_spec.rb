@@ -28,7 +28,7 @@ RSpec.describe Honeypot::SWCertWorker do
       ] }
       # rubocop:enable Metrics/LineLength
     ].map do |log|
-      model.new(log)
+      create(:log_sw_cert, log)
     end
   end
   let(:diff) do

@@ -36,7 +36,7 @@ RSpec.describe TestWorker do
     ]
     async_with_tailable_diff do
       logs.each do |log|
-        model.create!(log)
+        create(model, log)
       end
     end
     actual = []
