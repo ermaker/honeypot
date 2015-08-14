@@ -6,6 +6,6 @@ class Log
   include Tailable
 
   def self.recent(where)
-    where(where).desc('c_at').limit(1)
+    where(where).desc('c_at').limit(1).first
   end
 end
