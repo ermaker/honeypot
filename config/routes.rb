@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'auth/start' => 'auth#start'
   get 'auth/complete' => 'auth#complete'
   get 'setting/sw_cert' => 'setting#edit_sw_cert'
+  put 'setting/sw_cert' => 'setting#update_sw_cert'
   resources :logs, only: :create, defaults: { format: :json }
 
   # The priority is based upon order of creation: first created -> highest priority.
