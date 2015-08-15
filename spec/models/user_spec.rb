@@ -16,4 +16,8 @@ RSpec.describe User do
     )
     expect(result).to eq('id')
   end
+
+  it '#sw_cert_setting works' do
+    expect(create(described_class).sw_cert_setting.size).to eq(8)
+  end
 end
