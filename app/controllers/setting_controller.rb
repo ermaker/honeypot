@@ -7,4 +7,8 @@ class SettingController < ApplicationController
       [items, @sw_cert_setting.include?(items)]
     end
   end
+
+  def update_sw_cert
+    redirect_to(:setting_sw_cert)
+  end
 end

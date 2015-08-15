@@ -13,4 +13,13 @@ RSpec.describe SettingController do
       expect(assigns(:sw_cert_setting_checkbox).size).to eq(8)
     end
   end
+
+  describe 'PUT #update_sw_cert' do
+    it 'works' do
+      sign_in create(:user)
+      create(:log_sw_cert)
+      put :update_sw_cert
+      expect(response).to redirect_to(:setting_sw_cert)
+    end
+  end
 end
