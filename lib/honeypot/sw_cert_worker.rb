@@ -17,6 +17,10 @@ module Honeypot
       hash.select { |k, _| user.sw_cert_setting.include?(k) }
     end
 
+    def body(diff, prev)
+      diff.map { |k, v| "#{k}: #{prev[k]} -> #{v}" }.join("\n")
+    end
+
     def notify(user, prev, now)
       prev = select_by_user(to_hash(prev), user)
       now = select_by_user(to_hash(now), user)
@@ -24,7 +28,7 @@ module Honeypot
         user.push(
           type: :note,
           title: diff.values.sum,
-          body: diff.map { |k, v| "#{k}: #{prev[k]} -> #{v}" }.join("\n")
+          body: body(diff, prev)
         ) unless diff.empty?
       end
     end
