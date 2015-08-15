@@ -18,6 +18,6 @@ RSpec.describe User do
   end
 
   it '#sw_cert_setting works' do
-    expect(create(described_class).sw_cert_setting.size).to eq(8)
+    expect(create(described_class).sw_cert_setting.size).to eq(5)
   end
 end

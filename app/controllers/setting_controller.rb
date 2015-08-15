@@ -1,6 +1,10 @@
 # The setting controller
 class SettingController < ApplicationController
   def edit_sw_cert
-    @candidates = Log.recent(type: :sw_cert).status
+    @sw_cert_setting = current_user.sw_cert_setting
+    @candidates = Log.sw_cert_candidates
+    @sw_cert_setting_checkbox = @candidates.map do |items|
+      [items, @sw_cert_setting.include?(items)]
+    end
   end
 end
