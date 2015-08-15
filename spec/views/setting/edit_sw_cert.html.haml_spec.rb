@@ -21,7 +21,5 @@ RSpec.describe 'setting/edit_sw_cert' do
     # rubocop:enable Metrics/LineLength
 
     render
-
-    expect(rendered).to match //
   end
 end
