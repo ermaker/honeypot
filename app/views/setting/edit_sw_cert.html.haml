@@ -1,4 +1,4 @@
-= form_for current_user, url: {} do |f|
+= form_for current_user, url: { action: :update_sw_cert } do |f|
   %div
     - @sw_cert_setting_checkbox.each do |key, value|
       %div
