@@ -25,7 +25,7 @@ module Honeypot
           type: :note,
           title: diff.values.sum,
           body: diff.map { |k, v| "#{k}: #{prev[k]} -> #{v}" }.join("\n")
-        )
+        ) unless diff.empty?
       end
     end
 
