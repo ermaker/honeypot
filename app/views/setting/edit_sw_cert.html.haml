@@ -1,0 +1,8 @@
+= form_for current_user, url: {} do |f|
+  %div
+    - @sw_cert_setting_checkbox.each do |key, value|
+      %div
+        = check_box_tag 'user[setting][]', key, value
+        = key
+  %div
+    = f.submit
