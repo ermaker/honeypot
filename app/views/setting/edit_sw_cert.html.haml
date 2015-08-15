@@ -2,7 +2,7 @@
   %div
     - @sw_cert_setting_checkbox.each do |key, value|
       %div
-        = check_box_tag 'user[setting][]', key.to_json, value
+        = check_box_tag 'user[sw_cert_setting][]', key.to_json, value
         = key
   %div
     = f.submit
