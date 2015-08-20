@@ -1,7 +1,13 @@
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGODB_URI'] %>
+      uri: <%=
+        if ENV['MONGO_PORT_27017_TCP_ADDR'] && ENV['MONGO_PORT_27017_TCP_PORT'] && ENV['MONGO_DATABASE']
+          "mongodb://#{ENV['MONGO_PORT_27017_TCP_ADDR']}:#{ENV['MONGO_PORT_27017_TCP_PORT']}/#{ENV['MONGO_DATABASE']}"
+        else
+          ENV['MONGODB_URI']
+        end
+        %>
 
 development:
   # Configure available database sessions. (required)
