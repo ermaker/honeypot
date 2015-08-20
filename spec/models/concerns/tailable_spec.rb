@@ -32,5 +32,12 @@ RSpec.shared_examples_for 'tailable' do
       expect(described_class.all.size).to eq(1)
       expect(described_class.collection).to be_capped
     end
+
+    it 'DOES NOT recreate collection if it already exists' do
+      described_class.create_collection_tailable!
+      described_class.create(value: true)
+      described_class.create_collection_tailable!
+      expect(described_class.last[:value]).to be_truthy
+    end
   end
 end

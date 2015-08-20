@@ -11,8 +11,10 @@ module Tailable
       ).tap { create }
     rescue Moped::Errors::OperationFailure => e
       raise unless e.details[:errmsg] == 'collection already exists'
-      collection.drop
-      retry
+      unless collection.capped?
+        collection.drop
+        retry
+      end
     end
   end
 end
