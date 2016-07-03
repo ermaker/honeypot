@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  subject { create(:user) }
+  subject { create(described_class.name.underscore.to_sym) }
   it '#push works' do
     FakeWeb.register_uri(
       :post,
