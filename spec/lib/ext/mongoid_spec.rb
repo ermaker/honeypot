@@ -40,11 +40,13 @@ RSpec.describe TestModel do
           break if (count -= 1).zero?
         end
         actual.map! { |items| items.map(&:attributes_without_generated_values) }
-        expect(actual).to match([
-          [{ 'value' => 0 }, { 'value' => 1 }],
-          [{ 'value' => 1 }, { 'value' => 2 }],
-          [{ 'value' => 2 }, { 'value' => 3 }]
-        ])
+        expect(actual).to match(
+          [
+            [{ 'value' => 0 }, { 'value' => 1 }],
+            [{ 'value' => 1 }, { 'value' => 2 }],
+            [{ 'value' => 2 }, { 'value' => 3 }]
+          ]
+        )
       end
     end
 
@@ -63,9 +65,9 @@ RSpec.describe TestModel do
           break([prev, now])
         end
         actual.map!(&:attributes_without_generated_values)
-        expect(actual).to match([
-          { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
-        ])
+        expect(actual).to match(
+          [{ 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }]
+        )
       end
 
       it 'works with existing values' do
@@ -77,9 +79,9 @@ RSpec.describe TestModel do
           break([prev, now])
         end
         actual.map!(&:attributes_without_generated_values)
-        expect(actual).to match([
-          { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
-        ])
+        expect(actual).to match(
+          [{ 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }]
+        )
       end
     end
   end
