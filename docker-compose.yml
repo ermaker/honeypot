@@ -1,0 +1,36 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    command: --smallfiles
+    volumes:
+      - mongo:/data/db
+  redis:
+    image: redis
+    command: --appendonly yes
+    volumes:
+      - redis:/data
+  mshard:
+    image: ermaker/mshard_server
+    environment:
+      - REDIS_URL=redis://redis
+      - PUSHBULLET_ACCESS_TOKEN=$MSHARD_PUSHBULLET_ACCESS_TOKEN
+      - SECRET_KEY_BASE=$MSHARD_SECRET_KEY_BASE
+    ports:
+      - 80
+    depends_on:
+      - redis
+  honeypot:
+    image: ermaker/honeypot
+    environment:
+      - MONGODB_URI=mongodb://mongo/honeypot_production
+      - MSHARD_URI=http://mshard
+      - SECRET_KEY_BASE=$SECRET_KEY_BASE
+      - PUSHBULLET_CLIENT_ID=$PUSHBULLET_CLIENT_ID
+      - PUSHBULLET_CLIENT_SECRET=$PUSHBULLET_CLIENT_SECRET
+    depends_on:
+      - mongo
+      - mshard
+volumes:
+  redis: {}
+  mongo: {}
