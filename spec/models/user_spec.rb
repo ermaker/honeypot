@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User do
+  subject { create(:user) }
   it '#push works' do
     FakeWeb.register_uri(
       :post,
@@ -9,7 +10,7 @@ RSpec.describe User do
       body: { id: :id }.to_json
     )
 
-    result = create(described_class).push(
+    result = subject.push(
       type: :note,
       title: 'title',
       body: 'body'
@@ -18,6 +19,6 @@ RSpec.describe User do
   end
 
   it '#sw_cert_setting works' do
-    expect(create(described_class).sw_cert_setting.size).to eq(5)
+    expect(subject.sw_cert_setting.size).to eq(5)
   end
 end
