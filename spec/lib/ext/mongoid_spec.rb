@@ -10,6 +10,8 @@ RSpec.describe TestModel do
     described_class.collection.drop
   end
 
+  let(:class_symbol) { described_class.name.underscore.to_sym }
+
   describe '#tailable_diff' do
     def async_with_tailable_diff(&blk)
       s = Mutex.new
@@ -28,10 +30,10 @@ RSpec.describe TestModel do
 
       it 'works' do
         async_with_tailable_diff do
-          create(described_class, value: 0)
-          create(described_class, value: 1)
-          create(described_class, value: 2)
-          create(described_class, value: 3)
+          create(class_symbol, value: 0)
+          create(class_symbol, value: 1)
+          create(class_symbol, value: 2)
+          create(class_symbol, value: 3)
         end
         actual = []
         count = 3
@@ -40,11 +42,13 @@ RSpec.describe TestModel do
           break if (count -= 1).zero?
         end
         actual.map! { |items| items.map(&:attributes_without_generated_values) }
-        expect(actual).to match([
-          [{ 'value' => 0 }, { 'value' => 1 }],
-          [{ 'value' => 1 }, { 'value' => 2 }],
-          [{ 'value' => 2 }, { 'value' => 3 }]
-        ])
+        expect(actual).to match(
+          [
+            [{ 'value' => 0 }, { 'value' => 1 }],
+            [{ 'value' => 1 }, { 'value' => 2 }],
+            [{ 'value' => 2 }, { 'value' => 3 }]
+          ]
+        )
       end
     end
 
@@ -54,32 +58,32 @@ RSpec.describe TestModel do
 
       it 'works' do
         async_with_tailable_diff do
-          create(described_class, type: 0, value: 0)
-          create(described_class, type: 1, value: 0)
-          create(described_class, type: 0, value: 1)
-          create(described_class, type: 1, value: 1)
+          create(class_symbol, type: 0, value: 0)
+          create(class_symbol, type: 1, value: 0)
+          create(class_symbol, type: 0, value: 1)
+          create(class_symbol, type: 1, value: 1)
         end
         actual = critera.tailable_diff do |prev, now|
           break([prev, now])
         end
         actual.map!(&:attributes_without_generated_values)
-        expect(actual).to match([
-          { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
-        ])
+        expect(actual).to match(
+          [{ 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }]
+        )
       end
 
       it 'works with existing values' do
-        create(described_class, type: 1, value: 0)
+        create(class_symbol, type: 1, value: 0)
         async_with_tailable_diff do
-          create(described_class, type: 1, value: 1)
+          create(class_symbol, type: 1, value: 1)
         end
         actual = critera.tailable_diff do |prev, now|
           break([prev, now])
         end
         actual.map!(&:attributes_without_generated_values)
-        expect(actual).to match([
-          { 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }
-        ])
+        expect(actual).to match(
+          [{ 'type' => 1, 'value' => 0 }, { 'type' => 1, 'value' => 1 }]
+        )
       end
     end
   end

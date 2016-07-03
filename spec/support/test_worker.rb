@@ -1,6 +1,6 @@
 require 'honeypot/workable'
 
-class TestWorker # rubocop:disable Style/Documentation
+class TestWorker
   include Honeypot::Workable
 
   def critera
