@@ -13,5 +13,12 @@ namespace :jobs do
       Mongo::Logger.logger.level = Logger::INFO
       Honeypot::GetStudentWorker.new.run
     end
+
+    desc 'Do jobs of Center Worker'
+    task center: [:environment] do
+      require 'honeypot/worker/center'
+      Mongo::Logger.logger.level = Logger::INFO
+      Honeypot::Worker::Center.new.run
+    end
   end
 end
