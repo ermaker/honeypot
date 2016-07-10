@@ -1,8 +1,0 @@
-= form_for current_user, url: { action: :update_sw_cert } do |f|
-  %div
-    - @sw_cert_setting_checkbox.each do |key, value|
-      %div
-        = check_box_tag 'user[sw_cert_setting][]', key.to_json, value
-        = key
-  %div
-    = f.submit

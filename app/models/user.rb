@@ -45,6 +45,4 @@ class User
       params.merge(pushbullet: access_token)
     )
   end
-
-  field :sw_cert_setting, type: Array, default: []
 end

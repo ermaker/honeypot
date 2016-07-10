@@ -13,17 +13,13 @@ module Honeypot
       Hash[log[:status].map { |l| [l[0...-1], l[-1][/\d+$/].to_i] }]
     end
 
-    def select_by_user(hash, user)
-      hash.select { |k, _| user.sw_cert_setting.include?(k) }
-    end
-
     def body(now, prev)
       now.map { |k, v| "#{k}: #{prev[k]} -> #{v}" }.join("\n")
     end
 
     def notify(user, prev, now)
-      prev = select_by_user(to_hash(prev), user)
-      now = select_by_user(to_hash(now), user)
+      prev = to_hash(prev)
+      now = to_hash(now)
       user.push(
         type: :note,
         title: now.values.sum,
