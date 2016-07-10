@@ -3,13 +3,11 @@ module Mongoid
     def tailable_cursor
       skip_value = size - 1
       skip_value = 0 if skip_value < 0
-      query.tailable.skip(skip_value).cursor
+      cursor_type(:tailable).skip(skip_value).to_enum
     end
 
-    def tailable_diff
-      tailable_cursor.each_cons(2) do |args|
-        yield(*args.map { |arg| klass.new(arg) })
-      end
+    def tailable_diff(&blk)
+      tailable_cursor.each_cons(2, &blk)
     end
   end
 end
