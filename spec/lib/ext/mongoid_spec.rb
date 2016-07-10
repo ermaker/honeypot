@@ -15,7 +15,7 @@ RSpec.describe TestModel do
   describe '#tailable_diff' do
     def async_with_tailable_diff(&blk)
       s = Mutex.new
-      cached_tailable_cursor = critera.tailable_cursor
+      cached_tailable_cursor = critera.tailable_cursor.to_enum
       allow(critera).to receive(:tailable_cursor) do
         s.unlock
         cached_tailable_cursor

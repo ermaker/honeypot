@@ -344,7 +344,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jquery-rails
-  mongoid
+  mongoid (>= 5)
   mshard
   pry
   puma
