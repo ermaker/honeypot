@@ -3,7 +3,7 @@ module Mongoid
     def tailable_cursor
       skip_value = size - 1
       skip_value = 0 if skip_value < 0
-      cursor_type(:tailable).skip(skip_value).to_enum
+      cursor_type(:tailable_await).skip(skip_value).to_enum
     end
 
     def tailable_diff(&blk)
