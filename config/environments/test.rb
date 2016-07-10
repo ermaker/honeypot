@@ -42,5 +42,3 @@ Rails.application.configure do
 
   config.log_level = :warn
 end
-
-Moped.logger.level = Logger::INFO

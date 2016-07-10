@@ -37,7 +37,8 @@ RSpec.shared_examples_for 'tailable' do
       described_class.create_collection_tailable!
       described_class.create(value: true)
       described_class.create_collection_tailable!
-      expect(described_class.last[:value]).to be_truthy
+      expect(described_class.order(_id: :desc).first[:value]).to \
+        be_truthy
     end
   end
 end

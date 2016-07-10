@@ -27,7 +27,7 @@ gem 'sdoc', group: :doc
 
 gem 'haml'
 gem 'haml-rails'
-gem 'mongoid', '~> 4'
+gem 'mongoid'
 gem 'devise'
 gem 'httparty'
 gem 'mshard'
