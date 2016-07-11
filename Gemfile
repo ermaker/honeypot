@@ -68,3 +68,4 @@ gem 'foreman'
 gem 'rails_12factor'
 gem 'codecov', require: false, group: :test
 gem 'rails-html-sanitizer', '~> 1.0.3'
+gem 'slack-notifier'
