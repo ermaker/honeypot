@@ -6,16 +6,17 @@ module Honeypot
     class Center
       include Workable
 
-      def initialize
-        @notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URI'] # , channel: '#center'
-      end
-
       def critera
         Log.where(type: 'center')
       end
 
       def notify(prev, now)
-        @notifier.ping "<!channel> #{now.to_json}"
+        MShard::MShard.new.set_safe(
+          slack: true,
+          webhook_url: ENV['SLACK_WEBHOOK_URI'],
+          # channel: '#center',
+          text: "<!channel> #{now.to_json}"
+        )
       end
 
       def check(prev, now)
