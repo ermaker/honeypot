@@ -15,7 +15,7 @@ module Honeypot
           slack: true,
           webhook_url: ENV['SLACK_WEBHOOK_URI'],
           # channel: '#center',
-          text: '<!channel> Center Changed: [click for detail](%{uri})',
+          text: '<!channel> Changed: [click for detail](%{uri})',
           contents: now.to_json
         )
       end
