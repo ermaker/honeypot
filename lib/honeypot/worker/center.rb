@@ -21,6 +21,13 @@ module Honeypot
       end
 
       def check(prev, now)
+        Logger.new($stderr).debug do
+          now
+            .as_json
+            .to_options
+            .reject { |k, _| [:_id, :status].include?(k) }
+            .merge(status_count: now[:status]&.size)
+        end
         notify(prev, now) if prev[:status] != now[:status]
       end
     end
