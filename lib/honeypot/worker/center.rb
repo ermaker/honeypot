@@ -63,7 +63,7 @@ module Honeypot
               pretext: "#{prev_sum} -> #{now_sum} <!channel>",
               title: "Available: #{now_sum}",
               text: to_inspect(now_to).join("\n"),
-              footer: "#{lastdate} may not available yet."
+              footer: "#{lastdate} may not be available yet."
             }
           ],
         )
