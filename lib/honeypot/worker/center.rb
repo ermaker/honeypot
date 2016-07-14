@@ -26,7 +26,7 @@ module Honeypot
             to_[[date, time]] = MAX unless to_.key? [date, time]
           end
         end
-        to_.reject { |_, v| v.zero? }
+        to_.select { |_, v| v.positive? }
       end
 
       def to_inspect(to_)
