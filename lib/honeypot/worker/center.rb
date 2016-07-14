@@ -13,7 +13,7 @@ module Honeypot
       MAX = 4
 
       def status(center)
-        center[:status].group_by {|v| v.values_at('RSV_DT', 'RSV_TM')}
+        (center[:status] || []).group_by {|v| v.values_at('RSV_DT', 'RSV_TM')}
       end
 
       def to(status_)
@@ -41,6 +41,7 @@ module Honeypot
       end
 
       def lastdate_string(status_)
+        return 'Data' if status_.empty?
         Date.parse(status_.keys.max[0]).strftime('%m-%d(%a)')
       end
 
