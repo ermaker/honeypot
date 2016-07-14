@@ -77,9 +77,10 @@ module Honeypot
           now_status = status(now)
           now_to = to(status(now))
           now_sum = to_sum(now_to)
-          "#{prev_sum} -> #{now_sum}"
+          "[#{prev[:status] == now[:status] ? 'Same' : 'Different'}] " \
+            "#{prev_sum} -> #{now_sum}"
         end
-        notify(prev, now) if prev[:status] != now[:status]
+        notify(prev, now) unless prev[:status] == now[:status]
       end
 
       def peek_
