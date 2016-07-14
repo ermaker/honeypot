@@ -70,11 +70,13 @@ module Honeypot
 
       def check(prev, now)
         Logger.new($stderr).debug do
-          now
-            .as_json
-            .to_options
-            .reject { |k, _| [:_id, :status].include?(k) }
-            .merge(status_count: now[:status]&.size)
+          prev_status = status(prev)
+          prev_to = to(prev_status)
+          prev_sum = to_sum(prev_to)
+          now_status = status(now)
+          now_to = to(status(now))
+          now_sum = to_sum(now_to)
+          "#{prev_sum} -> #{now_sum}"
         end
         notify(prev, now) if prev[:status] != now[:status]
       end
