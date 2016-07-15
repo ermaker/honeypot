@@ -7,7 +7,7 @@ module Mongoid
     end
 
     def tailable_diff(&blk)
-      tailable_cursor.each_cons(2, &blk)
+      tailable_cursor.each.each_cons(2, &blk)
     end
   end
 end
