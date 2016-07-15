@@ -11,12 +11,14 @@ module Honeypot
       end
 
       def filter(status)
-        status[:status].select { |item| item['CNT4'] < item['PERSON_CNT'] }
+        status[:status].select do |item|
+          item['CNT4'].to_i < item['PERSON_CNT'].to_i
+        end
       end
 
       def to_inspect(item)
-        "#{item['CERTI_NM']}#{item['FOREIGNER_YN'] == 'Y' ? '(Foreigner)'} " \
-          ": #{item['PERSON_CNT'] - item['CNT4']} " \
+        "#{item['CERTI_NM']}#{'(Foreigner)' if item['FOREIGNER_YN'] == 'Y'} " \
+          ": #{item['PERSON_CNT'].to_i - item['CNT4'].to_i} " \
           "[#{item['QUAL_DT']} #{item['EDU_PLACE_NM']} " \
           "#{item['QUAL_ST_TIME']} ~ #{item['QUAL_ED_TIME']} " \
           "#{item['LANGUAGE_TYPE']}]"
@@ -32,7 +34,7 @@ module Honeypot
               fallback: "SWCERT TEST",
               pretext: "SWCERT TEST <!channel>",
               title: "TITLE",
-              text: filter(now).map { |item| to_inspect(item) },
+              text: filter(now).map { |item| to_inspect(item) }.join("\n"),
               footer: "FOOTER"
             }
           ],
