@@ -56,7 +56,7 @@ module Honeypot
         MShard::MShard.new.set_safe(
           slack: true,
           webhook_url: ENV['SLACK_WEBHOOK_URI'],
-          # channel: '#center',
+          channel: '#center',
           attachments: [
             {
               fallback: "#{prev_sum} -> #{now_sum}",
