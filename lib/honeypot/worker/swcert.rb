@@ -16,26 +16,49 @@ module Honeypot
         end
       end
 
+      def certi_nm(item)
+        "#{item['CERTI_NM'][0, 3]}#{'(F)' if item['FOREIGNER_YN'] == 'Y'}"
+      end
+
+      def date(item)
+        [item['QUAL_DT'][0, 4],
+         item['QUAL_DT'][4, 2],
+         item['QUAL_DT'][6, 2]].join('-')
+      end
+
+      def time(attr_)
+        [attr_[0, 2], attr_[2, 2]].join(':')
+      end
+
       def to_inspect(item)
-        "#{item['CERTI_NM']}#{'(Foreigner)' if item['FOREIGNER_YN'] == 'Y'} " \
-          ": #{item['PERSON_CNT'].to_i - item['CNT4'].to_i} " \
-          "[#{item['QUAL_DT']} #{item['EDU_PLACE_NM']} " \
-          "#{item['QUAL_ST_TIME']} ~ #{item['QUAL_ED_TIME']} " \
-          "#{item['LANGUAGE_TYPE']}]"
+        "*#{item['PERSON_CNT'].to_i - item['CNT4'].to_i}*: " \
+          "#{certi_nm(item)} " \
+          "#{date(item)} " \
+          "#{time(item['QUAL_ST_TIME'])} ~ #{time(item['QUAL_ED_TIME'])} " \
+          "#{item['EDU_PLACE_NM']} " \
+          "#{item['LANGUAGE_TYPE']}"
+      end
+
+      def sum(status)
+        status.map do |item|
+          item['PERSON_CNT'].to_i - item['CNT4'].to_i
+        end.reduce(0, :+)
       end
 
       def notify(prev, now)
+        prev_ = filter(prev)
+        now_ = filter(now)
         MShard::MShard.new.set_safe(
           slack: true,
           webhook_url: ENV['SLACK_WEBHOOK_URI'],
           # channel: '#swcert',
           attachments: [
             {
-              fallback: "SWCERT TEST",
-              pretext: "SWCERT TEST <!channel>",
-              title: "TITLE",
-              text: filter(now).map { |item| to_inspect(item) }.join("\n"),
-              footer: "FOOTER"
+              fallback: "#{sum(prev_)} -> #{sum(now_)}",
+              pretext: "*#{sum(prev_)}* -> *#{sum(now_)}* <!channel>",
+              title: "Available exams",
+              text: now_.map { |item| to_inspect(item) }.join("\n"),
+              mrkdwn_in: %w(pretext text)
             }
           ],
         )
