@@ -50,7 +50,7 @@ module Honeypot
         prev_to = to(prev_status)
         prev_sum = to_sum(prev_to)
         now_status = status(now)
-        now_to = to(status(now))
+        now_to = to(now_status)
         now_sum = to_sum(now_to)
         lastdate = lastdate_string(now_status)
         MShard::MShard.new.set_safe(
