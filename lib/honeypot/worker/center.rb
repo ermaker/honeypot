@@ -7,7 +7,7 @@ module Honeypot
       include Workable
 
       def critera
-        Log.where(type: 'center')
+        Log.where(type: ENV['TAG'])
       end
 
       MAX = 4
@@ -56,7 +56,7 @@ module Honeypot
         MShard::MShard.new.set_safe(
           slack: true,
           webhook_url: ENV['SLACK_WEBHOOK_URI'],
-          channel: '#center',
+          channel: "##{ENV['TAG']}",
           attachments: [
             {
               fallback: "#{prev_sum} -> #{now_sum}",
